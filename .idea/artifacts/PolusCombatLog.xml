@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="PolusCombatLog">
+    <output-path>$PROJECT_DIR$/../../server/lobby/plugins</output-path>
+    <root id="archive" name="PolusCombatLog.jar">
+      <element id="module-output" name="PolusCombatLog" />
+    </root>
+  </artifact>
+</component>

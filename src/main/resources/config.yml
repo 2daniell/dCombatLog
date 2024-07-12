@@ -1,0 +1,70 @@
+#Permissões:
+#  combatlog.reload - Permissão para usar o comando /combatlog reload
+#  combatlog.admin - Permissão para desativar/ativar o combate.
+
+expire-time: 15 #em segundos
+
+worlds: #Mundos onde o combatelog é ativo.
+  - 'world'
+
+config:
+
+  enable-enderpearl: true #Permitir usar enderperl em combate.
+
+  punish: true #Em caso de deslogar em combate o jogador morrerá.
+
+  message-punish: true #Enviar mensagem para todos ao jogador deslogar em combate.
+
+  command:
+    enable: true #Habilita o gerenciamentos dos Comandos
+    # WHITELIST - Comandos liberados e bloqueia todo o resto
+    # BLACKLIST - Comandos bloqueados e todo o resto liberado.
+    type: BLACKLIST
+    commands:
+      - '/spawn'
+      - '/lobby'
+      - '/warp'
+
+  teleport:
+    enable: true #Habilita o gerenciamento dos Teleportes
+
+    #Tipos de Teleportes possiveis para bloquear:
+
+    #ENDER_PEARL
+    #COMMAND
+    #PLUGIN
+    #NETHER_PORTAL
+    #END_PORTAL
+    #SPECTATE
+    #UNKNOWN
+
+    blocked-teleport-cause-list:
+      - 'PLUGIN'
+      - 'UNKNOWN'
+
+message:
+
+  leave-combat: '&aVocê não está mais em combate'
+
+  #Só será chamado caso a opção "enable-enderpearl" seja "false"
+  use-enderpearl: '&cVocê não pode usar enderpearl em combate.'
+
+  combat:
+
+    #Com essa opção, as mensagens "in-combat" e "no-enemy" vão ficar piscando em vermelho
+    #caso ativado as cores definidas são ignoradas para piscar em vermelho.
+    use-effect: true
+
+    in-combat: '&cVocê está em combate com %target% por mais %time% segundos'
+    no-enemy: '&cVocê está em combate por mais %time% segundos'
+
+  barrier-break: '&cOh, achamos um fujão... Você não pode quebrar esse bloco.'
+
+  #So será enviada caso a config "message-punish" está "true"
+  message-punish:
+    - ''
+    - '&cO jogador &f%player% &cnão aguentou a pressão.'
+    - '&7Deslogar em combate? Coisa feia hein...'
+
+  unavaliable-command: '&cComando indisponivel em combate'
+  teleport-canceled: '&cTeleporte cancelado por estar em combate.'
