@@ -1,5 +1,6 @@
 package com.daniel.combatlog;
 
+import br.com.ystoreplugins.product.yclans.ClanAPIHolder;
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.ProtocolManager;
 import com.daniel.combatlog.api.Version;
@@ -12,6 +13,7 @@ import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginManager;
+import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class CombatLog extends JavaPlugin {
@@ -42,6 +44,7 @@ public class CombatLog extends JavaPlugin {
 
             Bukkit.getPluginManager().disablePlugin(this); return;
         }
+
         instance = this;
         version = Version.getServerVersion();
 
@@ -89,5 +92,14 @@ public class CombatLog extends JavaPlugin {
 
     public static CombatLog getInstance() {
         return instance;
+    }
+
+    public static ClanAPIHolder getClanAPI() {
+        try {
+            RegisteredServiceProvider<ClanAPIHolder> provider = Bukkit.getServer().getServicesManager().getRegistration(ClanAPIHolder.class);
+            return (provider == null) ? null : (ClanAPIHolder) provider.getProvider();
+        } catch (Exception e) {
+            return null;
+        }
     }
 }

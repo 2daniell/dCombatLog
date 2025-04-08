@@ -6,6 +6,7 @@ import com.daniel.combatlog.combat.CombatLogManager;
 import com.daniel.combatlog.enums.CommandType;
 import com.daniel.combatlog.handler.RegionHandler;
 import com.daniel.combatlog.model.CombatInfo;
+import com.daniel.combatlog.utils.ClanUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -44,9 +45,13 @@ public class CombatLogListener implements Listener {
                 Player damaged = (Player) e.getEntity();
 
                 if (RegionHandler.PvpIsAllowed(damaged.getLocation()) && RegionHandler.PvpIsAllowed(damager.getLocation())) {
-
-                    manager.add(damaged.getUniqueId(), damager.getUniqueId());
-
+                    if (CombatLog.getClanAPI() != null) {
+                        if (!ClanUtils.isFriend(damaged, damager)) {
+                            manager.add(damaged.getUniqueId(), damager.getUniqueId());
+                        }
+                    } else {
+                        manager.add(damaged.getUniqueId(), damager.getUniqueId());
+                    }
                 }
 
             } else if (e.getCause() == EntityDamageEvent.DamageCause.PROJECTILE) {
@@ -69,7 +74,14 @@ public class CombatLogListener implements Listener {
 
                     if (RegionHandler.PvpIsAllowed(damaged.getLocation()) && RegionHandler.PvpIsAllowed(damager.getLocation())) {
 
-                        manager.add(damaged.getUniqueId(), damager.getUniqueId());
+
+                        if (CombatLog.getClanAPI() != null) {
+                            if (!ClanUtils.isFriend(damaged, damager)) {
+                                manager.add(damaged.getUniqueId(), damager.getUniqueId());
+                            }
+                        } else {
+                            manager.add(damaged.getUniqueId(), damager.getUniqueId());
+                        }
                     }
                 }
             }

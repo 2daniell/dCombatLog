@@ -1,9 +1,10 @@
 name: PolusCombatLog
 author: Daniel
-version: 1.0
+version: 1.4
 main: com.daniel.combatlog.CombatLog
 softdepend:
   - WorldEdit
+  - yPlugins
 depend:
   - WorldGuard
   - ProtocolLib
